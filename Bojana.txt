@@ -1,0 +1,78 @@
+Kada štampate dokumente, mnogi
+procesi, upravljacki programi
+(driveri) i uredaji rade zajedno da bi
+se odštampao dokument.
+Ako koristite štampac (fizicki uredaj) koji je
+povezan sa serverom za štampu postoje sledece
+kljucne komponente (operacije):
+1. Upravljacki program za štampu
+2. Lokalni spuler štampaca i procesor za štampu
+3. Usmerivac za štampu i spuler štampaca na serveru za
+štampanje
+4. Red za štampu
+5. Monitor za štampu
+6. Uredaj za štampu
+
+-----------------------------------------------------------------------
+Upravljacki program za štampu
+Kada štampate dokument iz aplikacije, vaš
+racunar ucitava upravljacki program za
+štampac.Ako je uredjaj za stampu povezan sa racunaraom onda se upravljacki program ucitava sa lokalnog diska uredjaja a ako je sa udaljenog onda se upravljacki program prevuce sa nekog udaljenog uredjaja.
+
+Lokalni spuler štampaca i
+procesor za štampu
+To je aplikacija iz koje stampamo i koristi upravljacki program za stampu kako bi preveo dokument u format koji moze da razume odredjeni uredjaj za stampu(stampac).Nakog toga dokument se predaje lokalnom spulera koji kasnije predaje proecsoru za stampu koji pravi ciste podatke za stampu(neophodne za stampanje na stampacu).
+
+Usmerivac za štampu i spuler
+štampaca na serveru za štampu
+Cisti podaci odlaze nazad spuleru i ako se stampa na udaljenom stampacu cisti podaci se usmeravaju na spuler stampaca na serveru za stampanje.
+
+Winspool.exe - lociranje udaljenog stampaca,usmerivanje poslova stampe i prevlacenje upravljackog programa za stampu
+Ako se neki od ovih poslova ne obavi krivac je ugl. usmerivac za stampu(popravka je zamena ili azuriranje winspool.exe)
+
+Zasto se upravljacki program za stampu prevlaci na klijente?
+Da ne bi instalirali upravljaci program na sve klijente dozvolimo samo prevlacenje sa servera i oni samo prevuku taj program
+
+Red za štampu
+Nakod sto cisti podaci dodju u spuler oni idu u stek stampaca (red za stampu).Kada dokument dodje u red za stampu naziva se print job(stampacki posao/zadatak kojim rukuje spuler stampaca).Vreme koje dokument provodi u redu zavisi od prioriteta i pozicije unutar reda za stampanje.
+
+Monitor za štampu
+
+Kada dokument dodje na vrh steka(dodje na red) onda monitor stampaca salje dokument na uredjaj za stampu,na kome se vrsi stampa na papir,foliju itd...Podrazumevani monitor za stampu je Localmon.dll ili Hpmon.dll
+-----------------------------------------------------------------------
+Uredaj za štampu je fizicki uredaj koji štampa
+dokumente na papiru.
+
+Printer je softverski interfejs(program) koji odredjuje kako poslovi stampanja putuju do fizickom uredjaja za stampu i omogucava nam na menjamo odredjene parametre stampe.
+
+Uloga print servera (Servera za stampu) je da deli uredjaje za stampu  u mrezi i rukuje spulerom stampaca.Prednost ovoga je sto imamo cetralizovano upravljanje redom za stampu i ne moramo da instaliramo upravljacke programe na klijentske racunare.
+Uredjaju za stampu mogu biti podeseni kao lokalni ili mrezni.
+
+Kod lokalno uredjaja za stampu obradu stampackog posla vrsi vasa masina i vas procesor.A kod mrezne to vrsi print server.Takodje je razlika u tome sto lokalni uredjaj mogu da koriste samo korisnici koji su ulogovani na taj 1 racunar a mrezni je dostupan svim mreznim korisnicima.
+Da bi se sto bolje iskoristion broj stampaca koristi se printer pooling.
+Svaki koristnik koji zeli da stampa mora imati svoj printer ali ne i svoj uredjaj za stampanje.Jedan printer moze da salje poslove na vise uredjaja za stampanje,vise printera moze da salje na 1 uredjaj.
+
+Da bi se instalirao stampac kod win 2008 srv moramo bit clan 1 od 3 grupe:
+Administrators
+Print Operators
+Server Operators
+
+Kada instaliramo stampac on moze biti povezan direktno na racunar ili preko mrezne kartice na mrezu.Stampaci koji su povezani sa mrezom su podeseni kao mrezni uredjaji i dostupni su svim mreznim korisnicima
+
+spoolsv.exe je servis za kontrolu spuliranja,ako ovaj servis nije pokrenut poslovi za stampu se ne mogu smestati u red za stampanje.
+Spooler moze biti pokvaren i simptomi su : spooler ne salje poslove ,stampa nesto sto nismo hteli itd...Popravka je obicno samo resetovanje Print Spoolera.
+
+Mrezni stampaci su deljeni resursi za koje se moze podesiti ovlascenja pristupa,podrazumevano Administrators, Print Operators, Server Operators imaju punu kontrolu.Korisnik koji stampa dokument moze da ga menja i obrise
+
+Najbolje resenje kod preduzeca koja stampaju dosta stvari:
+-Koristiti mrezne uredjaje za stampu(stampace)
+-Posvetiti server za stampanje da rukuje samo poslovima stampanja
+-Premestite direktorijum Spool-a na uredjaj koji je posvecen stampanju
+
+Direktorijum spoola sadrzi kopjiju svih dokumenata koji su u spooleru stampaca.
+ 
+Ako dodje do greske u sred rada:
+-Zamenite stampac ili drajver
+-Preusmerite printer na novi port
+
+
